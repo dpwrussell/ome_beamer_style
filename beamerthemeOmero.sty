@@ -1,0 +1,75 @@
+% Copyright 2007 by Till Tantau
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+\ProvidesPackageRCS $Header: /Users/joseph/Documents/LaTeX/beamer/base/themes/theme/beamerthemeOmero.sty,v d02a7cf4d8ae 2010/06/17 09:11:41 rivanvx $
+
+\mode<presentation>
+
+\definecolor{omebgblue}{RGB}{206,213,217}
+%\definecolor{omebgblue}{rgb}{10,10,10}
+%\definecolor{myp}{rgb}{10,0,10}
+
+\setbeamertemplate{frametitle}[default][center]
+
+% \setbeamertemplate{background}{
+%     \tikz[overlay,remember picture] \node[opacity=0.17, at=(current page.north east), xshift=-3cm, yshift=-3cm] {
+%         \includegraphics[width=\paperwidth]{OME_background}
+%     };
+% }
+
+% Create an ome section page
+\defbeamertemplate{section page}{ome}[1][]
+{
+    % {\usebeamerfont{section name}\usebeamercolor[fg]{section name}\sectionname~\insertsectionnumber}
+    % \vskip1em\par
+    \begin{beamercolorbox}[sep=12pt,center,#1]{part title}
+        \vspace*{4cm}
+        \begin{flushleft}
+            \usebeamerfont{section title} \LARGE \bfseries \insertsection\par
+        \end{flushleft}
+    \end{beamercolorbox}
+
+}
+
+% Override the default section page with the ome one
+\setbeamertemplate{section page}[ome]
+
+% It is also necessary to create a command 'omesectionpage' in order to change the background color
+% /omesectionpage should be used in place of \frame{\sectionpage}
+\newcommand{\omesectionpage}{
+    \begingroup
+        \setbeamercolor{background canvas}{bg=omebgblue}
+        \frame{\sectionpage}
+    \endgroup
+}
+
+\newenvironment{omeframe}
+{
+    \setbeamertemplate{background}{
+        \tikz[overlay,remember picture] \node[opacity=0.17, at=(current page.north east), xshift=-3cm, yshift=-3cm] {
+            \includegraphics[width=\paperwidth]{OME_background}
+        };
+    }
+    \begin{frame}
+}
+{ \end{frame} }
+
+\newenvironment{glencoeframe}
+{
+    \setbeamertemplate{background}{
+        \tikz[overlay,remember picture] \node[opacity=0.17, at=(current page.north east), xshift=-3cm, yshift=-3cm] {
+            \includegraphics[width=\paperwidth]{Glencoe_background}
+        };
+    }
+    \begin{frame}
+}
+{ \end{frame} }
+
+\mode
+<all>
