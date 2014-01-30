@@ -12,8 +12,6 @@
 \mode<presentation>
 
 \definecolor{omebgblue}{RGB}{206,213,217}
-%\definecolor{omebgblue}{rgb}{10,10,10}
-%\definecolor{myp}{rgb}{10,0,10}
 
 \setbeamertemplate{frametitle}[default][center]
 
@@ -43,12 +41,32 @@
 % It is also necessary to create a command 'omesectionpage' in order to change the background color
 % /omesectionpage should be used in place of \frame{\sectionpage}
 \newcommand{\omesectionpage}{
+    \setbeamertemplate{background}{
+        \tikz[overlay,remember picture] \node[opacity=0.17, at=(current page.north east), xshift=-3cm, yshift=-3cm] {
+            \includegraphics[width=\paperwidth]{OME_background}
+        };
+    }
     \begingroup
         \setbeamercolor{background canvas}{bg=omebgblue}
         \frame{\sectionpage}
     \endgroup
 }
 
+% Create a command 'glencoesectionpage' in order to change the background color
+% /omesectionpage should be used in place of \frame{\sectionpage}
+\newcommand{\glencoesectionpage}{
+    \setbeamertemplate{background}{
+        \tikz[overlay,remember picture] \node[opacity=0.17, at=(current page.north east), xshift=-3cm, yshift=-3cm] {
+            \includegraphics[width=\paperwidth]{Glencoe_background}
+        };
+    }
+    \begingroup
+        \setbeamercolor{background canvas}{bg=omebgblue}
+        \frame{\sectionpage}
+    \endgroup
+}
+
+% Frame with OME Graphic
 \newenvironment{omeframe}
 {
     \setbeamertemplate{background}{
@@ -60,6 +78,7 @@
 }
 { \end{frame} }
 
+% Frame with Glencoe Graphic
 \newenvironment{glencoeframe}
 {
     \setbeamertemplate{background}{
@@ -70,6 +89,41 @@
     \begin{frame}
 }
 { \end{frame} }
+
+
+% Title Frame with Microscope Graphic
+\newcommand{\ometitleframe}{
+    \setbeamertemplate{background}{
+        \begin{tikzpicture}[overlay,remember picture]
+            \node[scale=0.8, opacity=0.9, at=(current page.center), yshift=-2cm] {
+                \includegraphics[width=\paperwidth]{scopes_background}
+            };
+            \node[at=(current page.south west), anchor=south west, yshift=0.5cm] (dundee_logo) {
+                \includegraphics[width=1.5cm]{dundee_logo}
+            };
+            \node[align=left, right=of dundee_logo.east, anchor=west, xshift=-1.2cm, font=\tiny, opacity=0.4] {
+                Open Microscopy Environment\\
+                Centre for Gene Regulation \& Expression\\
+                College of Life Sciences, University of Dundee\\
+                Dundee, Scotland, UK
+            };
+            \node[at=(current page.south east), anchor=south east, yshift=0.7cm] (glencoe_logo) {
+                \includegraphics[width=3.5cm]{glencoe_logo}
+            };
+            \node[align=right, below=of glencoe_logo.east, anchor=east, xshift=-0.4cm, yshift=0.4cm, font=\tiny, opacity=0.4] {
+                Seattle, WA, USA
+            };
+
+        \end{tikzpicture}
+    }
+    \begingroup
+        \setbeamercolor{background canvas}{bg=omebgblue}
+        \begin{frame}
+        \titlepage
+        \end{frame}
+    \endgroup
+}
+
 
 \mode
 <all>
